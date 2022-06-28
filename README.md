@@ -1,4 +1,18 @@
-# Getting Started with Create React App
+# Firebase Developer 1
+
+> A developer who is able to use Firebase to develop secure, data-driven web applications.
+
+## Master the following skills:
+
+1. Able to discuss the types of problems Firebase tries to solve
+2. Integrate Firebase with an existing front-end application
+3. Utilize the Cloud Firestore to create, read, update and delete data from the front-end
+4. Query data in Firebase and display the array of responses in the front-end application
+5. Host a front-end web application with Firebase Hosting
+
+---
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

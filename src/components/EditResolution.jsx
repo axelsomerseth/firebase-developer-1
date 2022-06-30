@@ -5,6 +5,7 @@ import {
   updateResolution,
   deleteResolution,
 } from "../services/firestore";
+import { logAnalyticsEvent } from "../services/analytics";
 import { timeAgo } from "../utils";
 
 function EditResolution() {
@@ -47,6 +48,7 @@ function EditResolution() {
     const docId = id;
     deleteResolution(docId)
       .then(() => {
+        logAnalyticsEvent("resolution_deleted");
         handleBack();
       })
       .catch((error) => console.error(error));
@@ -61,7 +63,10 @@ function EditResolution() {
       datetime,
     };
     updateResolution(id, resolutionToUpdate)
-      .then(() => handleBack())
+      .then(() => {
+        logAnalyticsEvent("resolution_updated");
+        handleBack();
+      })
       .catch((error) => console.error(error));
   };
 

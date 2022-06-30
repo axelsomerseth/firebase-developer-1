@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { signUp } from "../services/auth";
 import Alert from "./Alert";
+import { logAnalyticsEvent } from "../services/analytics";
 
 function SignupModal() {
   const [email, setEmail] = useState("");
@@ -16,8 +17,9 @@ function SignupModal() {
         // Signed up and signed in
         // const user = userCredential.user;
         setAlertMessage(() => "");
-        closeButtonRef.current.click();
+        logAnalyticsEvent("signup");
         resetForm();
+        closeButtonRef.current.click();
       })
       .catch((error) => {
         setAlertMessage(() => error.message);

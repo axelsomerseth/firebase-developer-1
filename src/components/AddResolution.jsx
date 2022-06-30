@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { createResolution } from "../services/firestore";
+import { logAnalyticsEvent } from "../services/analytics";
 
 function AddResolution() {
   const [resolutionType, setResolutionType] = useState("Quit a bad habit");
@@ -20,6 +21,7 @@ function AddResolution() {
     };
     createResolution(newResolution)
       .then((doc) => {
+        logAnalyticsEvent("resolution_created");
         resetForm();
         closeButtonRef.current.click();
       })

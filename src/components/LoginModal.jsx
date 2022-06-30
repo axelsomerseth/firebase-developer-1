@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { logIn } from "../services/auth";
 import Alert from "./Alert";
+import { logAnalyticsEvent } from "../services/analytics";
 
 function LoginModal() {
   const [email, setEmail] = useState("");
@@ -16,8 +17,9 @@ function LoginModal() {
         // Signed in
         // const user = userCredential.user;
         setAlertMessage(() => "");
-        closeButtonRef.current.click();
+        logAnalyticsEvent("login");
         resetForm();
+        closeButtonRef.current.click();
       })
       .catch((error) => {
         setAlertMessage(() => error.message);

@@ -196,7 +196,7 @@ function EditResolution() {
               className="btn btn-primary"
               onClick={handleSave}
             >
-              &#x1F4BE; Save changes
+              &#x1F4BE; Save
             </button>
           </div>
         </div>

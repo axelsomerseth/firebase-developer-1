@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "./Navbar";
 import { getAuthState } from "../services/auth";
 
 function ProfileRoute() {
@@ -33,28 +32,22 @@ function ProfileRoute() {
 
   return (
     <>
-      <header>
-        <Navbar />
-      </header>
-      <main>
-        <div className="container">
-          <div className="row mt-3">
-            <div className="col d-flex justify-content-center align-items-center">
-              {user && (
-                <div className="card">
-                  <h5 className="card-header">Your info</h5>
-                  <div className="card-body">
-                    <pre style={{ height: "100%" }}>
-                      {JSON.stringify(getUserProps(user), null, 2)}
-                    </pre>
-                  </div>
+      <div className="container">
+        <div className="row mt-3">
+          <div className="col d-flex justify-content-center align-items-center">
+            {user && (
+              <div className="card">
+                <h5 className="card-header text-light bg-success">Your info</h5>
+                <div className="card-body">
+                  <pre style={{ height: "100%" }}>
+                    {JSON.stringify(getUserProps(user), null, 2)}
+                  </pre>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
-      </main>
-      <footer></footer>
+      </div>
     </>
   );
 }

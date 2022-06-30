@@ -9,7 +9,7 @@ function Navbar() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getAuthState((user) => {
+    const unSubscribeAuth = getAuthState((user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
@@ -21,6 +21,11 @@ function Navbar() {
         setLoggedIn(() => false);
       }
     });
+
+    // Unsubscribing when unmounting this component
+    return function cleanup() {
+      unSubscribeAuth();
+    };
   }, []);
 
   const handleLogOut = () => {
@@ -28,7 +33,7 @@ function Navbar() {
       .then(() => {
         // Sign-out successful.
         // console.log("Log out successful");
-        navigate("/", { replace: true });
+        navigate("/resolutions", { replace: true });
       })
       .catch((error) => {
         // An error happened.
@@ -40,9 +45,9 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
-        <Link to="/" className="navbar-brand">
-          <span>🎯</span>
-          &nbsp;&nbsp;Resolutions
+        <Link to="/resolutions" className="navbar-brand">
+          <span>&#x1F3AF;</span>
+          <span>&nbsp;&nbsp;Resolutions</span>
         </Link>
         <button
           className="navbar-toggler"
@@ -56,27 +61,26 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto">
-            {loggedIn && (
-              <li className="nav-item">
-                <Link to="/profile" className="nav-link active">
-                  Profile
-                </Link>
-              </li>
-            )}
-          </ul>
+          <ul className="navbar-nav me-auto"></ul>
           <ul className="navbar-nav ms-auto">
             {loggedIn ? (
-              <li>
-                <button className="btn btn-danger" onClick={handleLogOut}>
-                  Log out
-                </button>
-              </li>
+              <>
+                <li className="nav-item">
+                  <Link to="/profile" className="nav-link active">
+                    Profile
+                  </Link>
+                </li>
+                <li className="ms-lg-3">
+                  <button className="btn btn-warning" onClick={handleLogOut}>
+                    Log out
+                  </button>
+                </li>
+              </>
             ) : (
               <>
                 <li>
                   <button
-                    className="btn btn-primary"
+                    className="btn btn-success"
                     data-bs-toggle="modal"
                     data-bs-target="#loginModal"
                   >
